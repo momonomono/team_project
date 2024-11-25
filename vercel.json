@@ -1,21 +1,5 @@
 {
     "version": 2,
-    "builds": [
-        {
-          "src": "api/index.php",
-          "use": "vercel-php@0.6.0",
-          "config": {
-            "phpVersion": "8.1"
-          }
-        },
-        {
-          "src": "public/**",
-          "use": "vercel-php@0.6.0",
-          "config": {
-            "phpVersion": "8.1"
-          }
-        }
-      ],
     "routes": [
         {
             "src": "/(.*)",
@@ -23,7 +7,7 @@
         }
     ],
     "buildCommand": "./.vercel/build.sh",
-    "outputDirectory": "public",
+    "outputDirectory": ".",
     "env": {
         "APP_NAME": "Laravel Vercel",
         "APP_DEBUG": "false",
