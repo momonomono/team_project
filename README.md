@@ -29,7 +29,7 @@ docker run --rm \
     -u "$(id -u):$(id -g)" \
     -v "$(pwd):/var/www/html" \
     -w /var/www/html \
-    laravelsail/php81-composer:latest \
+    laravelsail/php82-composer:latest \
     composer install --ignore-platform-reqs
 ```
 
@@ -141,9 +141,6 @@ git commit -m 'create top layout'
 - HTML (https://developer.mozilla.org/ja/docs/Web/HTML)
 - CSS (https://developer.mozilla.org/ja/docs/Web/CSS)
 - JavaScript (https://developer.mozilla.org/ja/docs/Web/JavaScript)
-- TypeScript (https://www.typescriptlang.org)
-- React.js (https://ja.react.dev)
-- Vercel (https://vercel.com)
 - GitHub (https://github.co.jp)
 
 ## 推奨 VScode 拡張機能
@@ -151,15 +148,3 @@ git commit -m 'create top layout'
 - [Git Graph](https://marketplace.visualstudio.com/items?itemName=mhutchie.git-graph&ssr=false#qna) コミットの一覧 → 詳細を閲覧できる
 - [Git History](https://marketplace.visualstudio.com/items?itemName=donjayamanne.githistory) ファイルの履歴などを確認できる
 - [GitLens](https://marketplace.visualstudio.com/items?itemName=eamodio.gitlens) 視覚的にリポジトリ、ブランチ、ファイル、コミットの状態を確認や操作することができる
-
-## バージョン情報
-
-[volta](https://volta.sh) で管理
-
-```
-"node": "20以上",
-https://nodejs.org/ja
-
-"npm": "10以上"
-https://docs.npmjs.com/cli/v9/commands/npm-version
-```
