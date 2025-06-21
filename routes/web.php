@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use App\Models\Image;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -19,13 +21,18 @@ Route::get('/', function () {
 });
 
 Route::get('/image-test', function () {
-    $imageExists = Storage::disk('public')->exists('images/example.jpg');
-    return view('image-test', ['imageExists' => $imageExists]);
+    $image = Image::find(1);
+    return view('image-test', ['image' => $image]);
 });
 
 Route::post('/image-test', function (Request $request) {
     if ($request->hasFile('image')) {
-        $request->file('image')->storeAs('images', 'example.jpg', 'public');
+        $path = $request->file('image')->storeAs('images', 'example.jpg', 'public');
+
+        Image::updateOrCreate(
+            ['id' => 1],
+            ['path' => $path]
+        );
     }
     return redirect('/image-test');
 });
