@@ -1,9 +1,8 @@
-# ドキュメント
-
 ## 環境構築
 
 構築環境
 - docker
+- PHP 8.2
 - laravel 10（sail利用）
 参考：https://fadotech.com/laravel10-sail-clone/
 
@@ -63,7 +62,7 @@ docker run --rm \
 以下でエイリアスを変更しておくと、sailコマンドがsail~で実行できるようになる
 例：sail artisan migrate
 ```
-alias sail="vendor/bin/sail"
+alias sail='sh $([ -f sail ] && echo sail || echo vendor/bin/sail)'
 ```
 
 ## 開発 Tips
@@ -107,7 +106,7 @@ package に更新がないか、確認するため、 `npm install` コマンド
 
 ### Branch
 
-### ブランチ命名規則（**プレフィックス**をつける）
+#### ブランチ命名規則（**プレフィックス**をつける）
 
 - feature: 機能追加
 - fix: コード修正
@@ -125,7 +124,7 @@ git checkout -b 'bug/todotop_layout'
 
 ### Commit
 
-### コミットメッセージ
+#### コミットメッセージ
 
 - 日本語もしくは英語で端的に
 
@@ -138,10 +137,13 @@ git commit -m 'create top layout'
 
 ## 使用技術
 
-- HTML (https://developer.mozilla.org/ja/docs/Web/HTML)
-- CSS (https://developer.mozilla.org/ja/docs/Web/CSS)
-- JavaScript (https://developer.mozilla.org/ja/docs/Web/JavaScript)
-- GitHub (https://github.co.jp)
+- [HTML](https://developer.mozilla.org/ja/docs/Web/HTML)
+- [CSS](https://developer.mozilla.org/ja/docs/Web/CSS)
+- [JavaScript](https://developer.mozilla.org/ja/docs/Web/JavaScript)
+- [Laravel 10](https://laravel.com/docs/10.x/releases)
+- [Laravel Cloud](https://cloud.laravel.com)：Laravelを簡易デプロイできるツール（デプロイ担当者がアカウント作成する）
+- [AWS](https://aws.amazon.com/jp/)：DB(RDS)とファイルストレージ(S3)使用
+- [GitHub](https://github.co.jp)
 
 ## 推奨 VScode 拡張機能
 
