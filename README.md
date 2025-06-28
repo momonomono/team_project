@@ -147,6 +147,7 @@ git commit -m 'create top layout'
 - [AWS](https://aws.amazon.com/jp/)
   - RDS：データベース。本番で利用想定。
   - S3：ファイルストレージ。本番で利用（ローカルは任意）。
+- Laravel Breeze：認証機能。
 - FormRequest：バリデーションに使用。
 - configまたはenum：固定値の管理に使用。
 

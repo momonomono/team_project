@@ -9,8 +9,6 @@
 - ワイヤーフレームがないと、必要となる機能やデータを洗い出すことができません。
 - ワイヤーフレームを作成する際に重要なことは、デザイン以外の要素を除いて、画面要素（パーツやテキスト、大枠のレイアウト）は全て記載することです。テキストはダミーではなく、実際のものを記載します。デザイン的な装飾部分を除き、完成を想像できるくらいに解像度を高めておくのがポイントです。こうすることで、必要な機能やデータを抜けもれなく洗い出すことができます。
 
-![ワイヤーフレーム](https://github.com/shtk0llq/team-development_short/assets/119676984/90bad4b1-27b9-459f-a89e-c511c19955f9)
-
-[Figma](https://www.figma.com/design/zFMnzObdV84JSmGPvddKUP/techblog-%E3%83%AF%E3%82%A4%E3%83%A4%E3%83%BC%E3%83%95%E3%83%AC%E3%83%BC%E3%83%A0?node-id=0%3A1&t=zKqRSDp8wVCoxsLr-1)
+[Figma](https://www.figma.com/design/0VpFZ2SC8LFFI4PskJIOIs/%E3%83%AF%E3%82%A4%E3%83%A4%E3%83%BC%E3%83%95%E3%83%AC%E3%83%BC%E3%83%A0?node-id=0-1&t=C41CBpOEvgmFP5sm-1)
 
 **※ ご用意したワイヤーフレームは、色付けや幅・高さなど細かい箇所は設定していない為、チーム内で決めて開発していただくようにお願いします。**
