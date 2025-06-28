@@ -1,4 +1,5 @@
 services:
+    # sailでbuildする前にコンテナ名を決める。コンテナ作成後は固定する。
     laravel.blog:
         build:
             context: ./vendor/laravel/sail/runtimes/8.2
