@@ -4,7 +4,7 @@
 - docker
 - PHP 8.2
 - laravel 10（sail利用）
-参考：https://fadotech.com/laravel10-sail-clone/
+  - 参考：https://fadotech.com/laravel10-sail-clone/
 
 **1. git clone**
 
@@ -136,14 +136,23 @@ git commit -m 'create top layout'
 ```
 
 ## 使用技術
-
+### 言語/フレームワーク
 - [HTML](https://developer.mozilla.org/ja/docs/Web/HTML)
 - [CSS](https://developer.mozilla.org/ja/docs/Web/CSS)
-- [JavaScript](https://developer.mozilla.org/ja/docs/Web/JavaScript)
+- [PHP 8.2](https://www.php.net/releases/8.2/ja.php)
 - [Laravel 10](https://laravel.com/docs/10.x/releases)
-- [Laravel Cloud](https://cloud.laravel.com)：Laravelを簡易デプロイできるツール（デプロイ担当者がアカウント作成する）
-- [AWS](https://aws.amazon.com/jp/)：DB(RDS)とファイルストレージ(S3)使用
+- [JavaScript](https://developer.mozilla.org/ja/docs/Web/JavaScript) ※必要に応じて使用
+
+### 技術
+- [AWS](https://aws.amazon.com/jp/)
+  - RDS：データベース。本番で利用想定。
+  - S3：ファイルストレージ。本番で利用（ローカルは任意）。
+- FormRequest：バリデーションに使用。
+- configまたはenum：固定値の管理に使用。
+
+### その他
 - [GitHub](https://github.co.jp)
+- [Laravel Cloud](https://cloud.laravel.com)：Laravelを簡易デプロイできるツール（デプロイ担当者がアカウント作成する）
 
 ## 推奨 VScode 拡張機能
 
