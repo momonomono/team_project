@@ -1,9 +1,7 @@
 <?php
 
+use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
-use App\Models\Image;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,19 +18,14 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/image-test', function () {
-    $image = Image::find(1);
-    return view('image-test', ['image' => $image]);
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::post('/image-test', function (Request $request) {
-    if ($request->hasFile('image')) {
-        $path = $request->file('image')->storeAs('images', 'example.jpg', 'public');
-
-        Image::updateOrCreate(
-            ['id' => 1],
-            ['path' => $path]
-        );
-    }
-    return redirect('/image-test');
-});
+require __DIR__.'/auth.php';
