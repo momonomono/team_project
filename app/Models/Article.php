@@ -3,16 +3,21 @@
 namespace App\Models;
 
 use Illuminate\Http\Request;
+use App\Enums\Category;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent\Builder;
-use App\Enums\Category;
 use Illuminate\Support\Facades\Storage;
 
 class Article extends Model
 {
     use HasFactory;
+
+     // カテゴリのキャスト
+     protected $casts = [
+        'category_id' => Category::class,
+    ];
 
     protected $fillable = [
         'user_id',
@@ -22,10 +27,6 @@ class Article extends Model
         'image_path',
     ];
 
-    // カテゴリのキャスト
-    protected $casts = [
-        'category_id' => Category::class,
-    ];
 
     // image_pathのアクセサ
     public function getImagePathAttribute($value)
@@ -88,4 +89,9 @@ class Article extends Model
         }
         return $query;
     }
+    // attributes for category
+    // public function getCategoryAttribute()
+    // {
+    //     return Category::from($this->category_id)->label();
+    // }
 } 
