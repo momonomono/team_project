@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\Category;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -25,4 +26,15 @@ class Article extends Model
     {
         return $this->hasMany(Comment::class);
     }
+
+    // attributes for category
+    // public function getCategoryAttribute()
+    // {
+    //     return Category::from($this->category_id)->label();
+    // }
+
+    // カテゴリのキャスト
+    protected $casts = [
+        'category_id' => Category::class,
+    ];
 } 
