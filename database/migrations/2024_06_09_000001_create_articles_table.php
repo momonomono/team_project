@@ -13,6 +13,7 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
             $table->tinyInteger('category_id');
             $table->string('title');
+            $table->tinyInteger('category_id');
             $table->text('content');
             $table->string('image_path')->nullable();
             $table->timestamps();
