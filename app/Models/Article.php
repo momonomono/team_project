@@ -94,4 +94,5 @@ class Article extends Model
     // {
     //     return Category::from($this->category_id)->label();
     // }
+
 } 
