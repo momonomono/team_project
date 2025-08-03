@@ -26,9 +26,8 @@ class PostController extends Controller
     /**
      * コメントを保存
      *
-     * @param  \Illuminate\Http\CommentRequest  $request
+     * @param  CommentRequest  $request
      * @param  int  $id
-     * @return \Illuminate\Http\RedirectResponse
      */
     public function storeComment(CommentRequest $request, $id)
     {

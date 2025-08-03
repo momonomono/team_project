@@ -4,9 +4,11 @@
         <h1 class="text-3xl font-bold mb-4">{{ $article->title }}</h1>
 
         <!-- 画像 -->
-        <div class="mb-4">
-            <img src="{{ asset('storage/' . $article->image_path) }}" alt="サンプル画像" class="w-full rounded-lg">
-        </div>
+        @if ($article->image_path)
+            <div class="mb-4">
+                <img src="{{ $article->image_path }}" alt="サンプル画像" class="w-full rounded-lg">
+            </div>
+        @endif
 
         <!-- カテゴリー -->
         <div class="text-sm text-gray-500 mb-2">
