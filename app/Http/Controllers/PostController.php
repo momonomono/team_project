@@ -92,4 +92,9 @@ class PostController extends Controller
         // 確認用にリダイレクト
         return back()->with('success', 'コメントを投稿しました。');
     }
+
+    public function myPosts() {
+        $myPosts = Article::where('user_id', auth()->user()->id)->paginate(6);
+        return view('myPosts', compact('myPosts'));
+    }
 }
