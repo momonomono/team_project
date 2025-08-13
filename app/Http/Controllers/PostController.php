@@ -35,14 +35,12 @@ class PostController extends Controller
     public function storeArticle(ArticleRequest $request)
     {   
         // DBに入れるデータを変数に挿入
-        $todolists = $request->validated();
+        $article = $request->validated();
         // 画像の保管
-        $todolists['image_path'] = $request->file('image_path')->store('images', 'public');
-        // ログインユーザーのIDを追加
-        $todolists['user_id'] = Auth::id();
-
-        // DBに登録
-        Article::create($todolists);
+        $article['image_path'] = $request->file('image_path')->store('images', 'public');
+        
+        // 新規記事を追加
+        Article::addNewArticle($article);
 
         // トップ画面に戻る
         return redirect()->route('top');

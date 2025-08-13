@@ -19,15 +19,12 @@ Route::get('/', function () {
     return view('top');
 })->name('top');
 
-Route::get('/post/create', [PostController::class, 'createArticle'])->name('create.article');
-Route::post('/post/create', [PostController::class, 'storeArticle'])->name('store.article');
-
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-    // 更新する
+    // 新規投稿画面と登録
     Route::get('/post/create', [PostController::class, 'createArticle'])->name('create.article');
     Route::post('/post/create', [PostController::class, 'storeArticle'])->name('store.article');
 });
