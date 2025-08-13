@@ -27,6 +27,7 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
+    // 更新する
     Route::get('/post/create', [PostController::class, 'createArticle'])->name('create.article');
     Route::post('/post/create', [PostController::class, 'storeArticle'])->name('store.article');
 });
