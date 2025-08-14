@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -22,6 +23,11 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+    // 記事編集
+    Route::get('post/edit/{id?}', [PostController::class, 'editArticle'])->name('edit.article');
+    Route::patch('post/edit/{id?}', [PostController::class, 'updateArticle'])->name('update.article');
+    Route::delete('post/delete', [PostController::class, 'deleteArticle'])->name('delete.article');
 });
 
 require __DIR__.'/auth.php';
