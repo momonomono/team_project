@@ -24,10 +24,10 @@
                 <div class="h-28 w-28 relative">
                     <input 
                         type="file" name="image_path" 
-                        class="w-full h-full" id="js-edit-fileUploader"
+                        class="w-full h-full" id="js-form-imagePath"
                     >
                     <img
-                        id="js-edit-image"
+                        id="js-image"
                         src="{{ asset('storage/'.$article->image_path ?? '') }}" 
                         class="w-full h-full absolute top-0 left-0"
                     >
