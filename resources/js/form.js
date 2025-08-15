@@ -2,7 +2,7 @@
 const formImagePath = document.querySelector('#js-form-imagePath');
 
 // 画像フォームがあるか確認
-if(formImagePath){
+if (formImagePath) {
     // プレビュー画像の取得
     const image = document.querySelector('#js-image');
     
@@ -13,7 +13,7 @@ if(formImagePath){
         const path = formImagePath.files[0];
         
         // 画像が選択されていない場合は、画像を非表示にする
-        if(!path){
+        if (!path) {
             image.classList.add('hidden');
             return;
         }

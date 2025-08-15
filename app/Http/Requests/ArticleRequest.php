@@ -24,7 +24,7 @@ class ArticleRequest extends FormRequest
     {
         // 画像のバリデーションルール
         // 新規投稿画面で分岐
-        if( $this->path() === 'post/create' ){
+        if ($this->path() === 'post/create') {
             $image_path_rule = 'required|image|mimes:jpg,jpeg,png,gif,webp|max:2048';
         // 更新画面で分岐
         } else {
