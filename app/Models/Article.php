@@ -95,4 +95,9 @@ class Article extends Model
     //     return Category::from($this->category_id)->label();
     // }
 
+    // 自分の記事を取得するスコープ
+    public function scopeByUser($query)
+    {
+        return $query->where('user_id', auth()->id());
+    }
 } 
