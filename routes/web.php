@@ -1,10 +1,7 @@
 <?php
 
 use App\Http\Controllers\PostController;
-<<<<<<< HEAD
-=======
 use App\Http\Controllers\SearchController;
->>>>>>> a3add58 (Top画面 作成)
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -19,8 +16,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [SearchController::class, 'index'])->name('top');
-Route::get('/post/{id}', [SearchController::class, 'show'])->name('post.show');
+Route::get('/', [PostController::class, 'index'])->name('top');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

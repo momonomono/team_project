@@ -7,6 +7,8 @@ use App\Http\Requests\ArticleRequest;
 use App\Models\Article;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Pagination\Paginator;
+
 
 class PostController extends Controller
 {
@@ -24,6 +26,21 @@ class PostController extends Controller
 
         return view("create")
             ->with(compact("categories"));
+    }
+
+    public function index(Request $request) {
+        $posts = Article::query()
+        ->search($request->search)
+        ->category($request->category)
+        ->orderBy('created_at', 'desc')
+        ->paginate(6);
+
+        $posts->appends($request->query());
+
+        // カテゴリー一覧を取得
+        $categories = Category::cases();
+
+        return view('top', compact('posts', 'categories'));
     }
 
     /**
