@@ -19,7 +19,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [PostController::class, 'index'])->name('top');
+Route::get('/', [SearchController::class, 'index'])->name('top');
+Route::get('/post/{id}', [SearchController::class, 'show'])->name('post.show');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
