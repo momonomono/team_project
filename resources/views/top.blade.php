@@ -1,5 +1,6 @@
 <x-app-layout>
     <body class="bg-gray-50 min-h-screen">
+        
         <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
             <!-- Search Section -->
             <div class="bg-white rounded-lg shadow-sm p-6 mb-8">
@@ -53,12 +54,12 @@
                             
                             @if(request('category'))
                                 <span class="inline-flex items-center px-3 py-1 bg-green-100 text-green-800 text-sm rounded-full">
-                                    カテゴリー: {{ $post->category_id->label() }}
+                                    カテゴリー: {{ Category::from(request('category'))->label() }}
                                     <a href="{{ request()->fullUrlWithQuery(['category' => null]) }}" class="ml-2 text-green-600 hover:text-green-800 font-bold">×</a>
                                 </span>
                             @endif
                             
-                            <a href="{{ route('blog.index') }}" class="text-sm text-gray-600 hover:text-gray-800 underline">全てクリア</a>
+                            <a href="{{ route('top') }}" class="text-sm text-gray-600 hover:text-gray-800 underline">全てクリア</a>
                         </div>
                     </div>
                 @endif
@@ -74,7 +75,7 @@
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M9.172 16.172a4 4 0 015.656 0M9 12h6m-6-4h6m2 5.291A7.962 7.962 0 0118 12a8 8 0 01-8 8 8 8 0 01-8-8 8 8 0 018-8c2.027 0 3.9.756 5.315 2"/>
                                 </svg>
                                 <p class="text-lg font-medium">検索条件に一致する投稿が見つかりませんでした。</p>
-                                <a href="{{ route('blog.index') }}" class="inline-block px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
+                                <a href="{{ route('top') }}" class="inline-block px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
                                     全ての投稿を表示
                                 </a>
                             </div>
@@ -91,10 +92,10 @@
                     @foreach($posts as $post)
                         <article class="bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow duration-300 overflow-hidden">
                             <div class="aspect-w-16 aspect-h-9">
-                                @if($post->image_path)
-                                    <div class="mb-4">
-                                        <img src="{{ $post->image_path }}" alt="サンプル画像" class="w-full rounded-lg">
-                                    </div>
+                                @if(!empty($post->image_url))
+                                    <img src="{{ $post->image_url }}" 
+                                         alt="{{ $post->title }}"
+                                         class="w-full h-48 object-cover">
                                 @else
                                     <div class="w-full h-48 bg-gradient-to-br from-gray-200 to-gray-300 flex items-center justify-center">
                                         <svg class="w-12 h-12 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -105,12 +106,6 @@
                             </div>
                             
                             <div class="p-6">
-                                <h3 class="text-xl font-bold text-gray-900 mb-3 line-clamp-2">
-                                    <a href="{{ route('post.show', $post->id) }}" class="hover:text-blue-600 transition-colors">
-                                        {{ $post->title }}
-                                    </a>
-                                </h3>
-                                
                                 <p class="text-gray-600 mb-4 line-clamp-3">
                                     {{ Str::limit($post->detail, 100) }}
                                 </p>
@@ -130,14 +125,13 @@
                     @endforeach
                 @endif
             </div>
-
+    
             <!-- ページネーション -->
             <div class="mt-10 pt-8 border-t border-gray-200">
                 <div class="pagination-custom space-y-4">
                     {{ $posts->links() }}
                 </div>
             </div>
-
         </main>
     </body>
 </x-app-layout>

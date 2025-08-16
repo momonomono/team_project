@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Builder;
 use App\Enums\Category;
 
 class Article extends Model
@@ -38,5 +39,26 @@ class Article extends Model
     public function comments()
     {
         return $this->hasMany(Comment::class);
+    }
+
+    // タイトル or コンテンツ検索スコープ
+    public function scopeSearch(Builder $query, ?string $term): Builder
+    {
+        if (!empty($term)) {
+            $query->where(function ($q) use ($term) {
+                $q->where('title', 'LIKE', "%{$term}%")
+                  ->orWhere('content', 'LIKE', "%{$term}%");
+            });
+        }
+        return $query;
+    }
+
+    // カテゴリー絞り込みスコープ
+    public function scopeCategory(Builder $query, ?int $categoryId): Builder
+    {
+        if (!empty($categoryId)) {
+            $query->where('category_id', $categoryId);
+        }
+        return $query;
     }
 } 
