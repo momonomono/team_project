@@ -27,7 +27,6 @@ class Article extends Model
         'image_path',
     ];
 
-
     // image_pathのアクセサ
     public function getImagePathAttribute($value)
     {
