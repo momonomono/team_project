@@ -9,7 +9,7 @@ use Illuminate\Pagination\Paginator;
 class PostController extends Controller
 {
     public function myPosts() {
-        $myPosts = Article::where('user_id', auth()->user()->id)->paginate(6);
+        $myPosts = Article::byUser()->paginate(6);
         return view('myPosts', compact('myPosts'));
     }
 }
