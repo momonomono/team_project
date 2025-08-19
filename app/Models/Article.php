@@ -2,9 +2,10 @@
 
 namespace App\Models;
 
+use App\Enums\Category;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Enums\Category;
+use Illuminate\Support\Facades\Storage;
 
 class Article extends Model
 {
