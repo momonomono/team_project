@@ -18,16 +18,6 @@ class Article extends Model
         'image_path',
     ];
 
-    public function user()
-    {
-        return $this->belongsTo(User::class);
-    }
-
-    public function comments()
-    {
-        return $this->hasMany(Comment::class);
-    }
-
     // カテゴリのキャスト
     protected $casts = [
         'category_id' => Category::class,
@@ -41,4 +31,19 @@ class Article extends Model
             : null;
     }
 
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
+
+    // 自分の記事を取得するスコープ
+    public function scopeByUser($query)
+    {
+        return $query->where('user_id', auth()->id());
+    }
 } 

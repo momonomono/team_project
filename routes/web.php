@@ -26,9 +26,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-
-    // コメント投稿
     Route::post('/post/{id}/comment', [PostController::class, 'storeComment'])->name('comments.store');
+    Route::get('/myPosts', [PostController::class, 'myPosts']);
 });
 
 require __DIR__.'/auth.php';

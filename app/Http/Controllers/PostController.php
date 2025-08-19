@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Http\Requests\CommentRequest;
 use App\Models\Article;
 use App\Models\Comment;
+use Illuminate\Http\Request;
+use Illuminate\Pagination\Paginator;
 
 class PostController extends Controller
 {
@@ -40,5 +41,10 @@ class PostController extends Controller
 
         // 確認用にリダイレクト
         return back()->with('success', 'コメントを投稿しました。');
+    }
+
+    public function myPosts() {
+        $myPosts = Article::byUser()->paginate(6);
+        return view('myPosts', compact('myPosts'));
     }
 }
