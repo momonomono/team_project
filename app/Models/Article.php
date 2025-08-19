@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Enums\Category;
 
 class Article extends Model
 {
@@ -16,6 +17,19 @@ class Article extends Model
         'image_path',
     ];
 
+    // カテゴリのキャスト
+    protected $casts = [
+        'category_id' => Category::class,
+    ];
+
+    // image_pathのアクセサ
+    public function getImagePathAttribute($value)
+    {
+        return $value
+            ? (app()->isProduction() ? Storage::disk('s3')->url($value) : asset('storage/' . $value))
+            : null;
+    }
+
     public function user()
     {
         return $this->belongsTo(User::class);
@@ -24,5 +38,11 @@ class Article extends Model
     public function comments()
     {
         return $this->hasMany(Comment::class);
+    }
+
+    // 自分の記事を取得するスコープ
+    public function scopeByUser($query)
+    {
+        return $query->where('user_id', auth()->id());
     }
 } 
