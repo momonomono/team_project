@@ -16,7 +16,7 @@ class PostController extends Controller
      * @param int $id
      * @return \Illuminate\View\View
      */
-    public function editArticle($id = "")
+    public function editArticle($id)
     {
         // IDがない場合、新規投稿画面へ ある場合、記事を取得
         $article = (new Article())->checkOwnArticle($id);
@@ -36,9 +36,16 @@ class PostController extends Controller
      */
     public function updateArticle(ArticleRequest $request, $id)
     {   
-        // IDがない場合、新規投稿画面へ ある場合、記事を取得
-        $article = (new Article())->checkOwnArticle($id);
+        
+        // IDがない場合、新規投稿画面へ
+        // if (!$id) {
+        //     return redirect()
+        //     ->route("create.article");
+        // }
 
+        // 新規投稿画面へ ある場合、記事を取得
+        $article = (new Article())->checkOwnArticle($id);
+        
         // バリデーションを通過したデータを取得
         $postData = $request->validated();
 
@@ -63,15 +70,13 @@ class PostController extends Controller
      * @param ArticleDeleteRequest $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function deleteArticle(ArticleDeleteRequest $request)
+    public function deleteArticle(Request $request)
     {   
+        
         // リクエストからIDを取得
         $id = $request->id;
 
         $article = new Article();
-
-        // IDがない場合、新規投稿画面へ
-        $article->checkOwnArticle($id);
 
         // 記事を削除
         $article->deleteArticle($id);

@@ -66,7 +66,7 @@
             </button>
         </form>
 
-        <form method="POST" action="{{ route('delete.article' )}}">
+        <form method="POST" action="{{ route('delete.article') }}">
             @csrf
             @method('DELETE')
             <input type="hidden" name="id" value="{{ $article->id }}">
