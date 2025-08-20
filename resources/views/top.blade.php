@@ -43,7 +43,7 @@
                 @if(request('search') || request('category'))
                     <div class="mt-4 pt-4 border-t border-gray-200">
                         <div class="flex flex-wrap items-center gap-2">
-                            <span class="text-sm font-medium text-gray-700">アクティブなフィルター:</span>
+                            <span class="text-sm font-medium text-gray-700">フィルター:</span>
                             
                             @if(request('search'))
                                 <span class="inline-flex items-center px-3 py-1 bg-blue-100 text-blue-800 text-sm rounded-full">
@@ -90,10 +90,11 @@
                     </div>
                 @else
                     @foreach($articles as $article)
+                        <a href="{{ route('post.show', $article->id)}}">
                         <article class="bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow duration-300 overflow-hidden">
                             <div class="aspect-w-16 aspect-h-9">
-                                @if(!empty($article->image_url))
-                                    <img src="{{ $article->image_url }}" 
+                                @if(!empty($article->image_path))
+                                    <img src="{{ $article->image_path }}" 
                                          alt="{{ $article->title }}"
                                          class="w-full h-48 object-cover">
                                 @else
@@ -106,8 +107,11 @@
                             </div>
                             
                             <div class="p-6">
+                                <h2 class="text-lg font-semibold text-gray-900 hover:text-blue-600 transition-colors line-clamp-2 leading-tight mb-2">
+                                    {{ $article->title }}
+                                </h2>
                                 <p class="text-gray-600 mb-4 line-clamp-3">
-                                    {{ Str::limit($article->detail, 100) }}
+                                    {{ Str::limit($article->detail, 50) }}
                                 </p>
                                 
                                 <div class="flex items-center justify-between text-sm text-gray-500 mb-3">
