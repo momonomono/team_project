@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\PostController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,10 +18,15 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [PostController::class, 'index'])->name('top');
 
+// 詳細画面
+Route::get('/post/{id}', [PostController::class, 'show'])->name('post.show');
+
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::post('/post/{id}/comment', [PostController::class, 'storeComment'])->name('comments.store');
+    Route::get('/myPosts', [PostController::class, 'myPosts']);
 });
 
 require __DIR__.'/auth.php';

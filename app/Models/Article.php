@@ -1,12 +1,12 @@
 <?php
 
 namespace App\Models;
-
 use Illuminate\Http\Request;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
 use App\Enums\Category;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Storage;
 
 class Article extends Model
 {
@@ -31,6 +31,7 @@ class Article extends Model
             ? (app()->isProduction() ? Storage::disk('s3')->url($value) : asset('storage/' . $value))
             : null;
     }
+
     public static function getArticles(Request $request)
     {
         return static::query()
@@ -69,5 +70,11 @@ class Article extends Model
             $query->where('category_id', $categoryId);
         }
         return $query;
+    }
+
+    // 自分の記事を取得するスコープ
+    public function scopeByUser($query)
+    {
+        return $query->where('user_id', auth()->id());
     }
 } 
