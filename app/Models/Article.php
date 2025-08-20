@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
@@ -29,6 +30,14 @@ class Article extends Model
         return $value
             ? (app()->isProduction() ? Storage::disk('s3')->url($value) : asset('storage/' . $value))
             : null;
+    }
+    public static function getArticles(Request $request)
+    {
+        return static::query()
+        ->search($request->search)
+        ->category($request->category)
+        ->orderBy('created_at', 'desc')
+        ->paginate(9);
     }
 
     public function user()

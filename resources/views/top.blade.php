@@ -10,7 +10,7 @@
                             <input 
                                 type="text" 
                                 name="search" 
-                                placeholder="Search posts..."
+                                placeholder="Search articles..."
                                 class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-colors"
                                 value="{{ request('search') }}"
                             >
@@ -65,9 +65,9 @@
                 @endif
             </div>
     
-            <!-- Blog Posts Grid -->
+            <!-- Blog articles Grid -->
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                @if($posts->isEmpty())
+                @if($articles->isEmpty())
                     <div class="col-span-full text-center py-12">
                         @if(request('search') || request('category'))
                             <div class="text-gray-500 space-y-4">
@@ -89,12 +89,12 @@
                         @endif
                     </div>
                 @else
-                    @foreach($posts as $post)
+                    @foreach($articles as $article)
                         <article class="bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow duration-300 overflow-hidden">
                             <div class="aspect-w-16 aspect-h-9">
-                                @if(!empty($post->image_url))
-                                    <img src="{{ $post->image_url }}" 
-                                         alt="{{ $post->title }}"
+                                @if(!empty($article->image_url))
+                                    <img src="{{ $article->image_url }}" 
+                                         alt="{{ $article->title }}"
                                          class="w-full h-48 object-cover">
                                 @else
                                     <div class="w-full h-48 bg-gradient-to-br from-gray-200 to-gray-300 flex items-center justify-center">
@@ -107,17 +107,17 @@
                             
                             <div class="p-6">
                                 <p class="text-gray-600 mb-4 line-clamp-3">
-                                    {{ Str::limit($post->detail, 100) }}
+                                    {{ Str::limit($article->detail, 100) }}
                                 </p>
                                 
                                 <div class="flex items-center justify-between text-sm text-gray-500 mb-3">
-                                    <span class="font-medium">{{ $post->user->name ?? 'Unknown' }}</span>
-                                    <time class="text-gray-400">{{ $post->created_at->format('Y年m月d日') }}</time>
+                                    <span class="font-medium">{{ $article->user->name ?? 'Unknown' }}</span>
+                                    <time class="text-gray-400">{{ $article->created_at->format('Y年m月d日') }}</time>
                                 </div>
                                 
                                 <div class="inline-block">
                                     <span class="px-3 py-1 bg-indigo-100 text-indigo-800 text-xs font-medium rounded-full">
-                                        {{ $post->category_id->label() }}
+                                        {{ $article->category_id->label() }}
                                     </span>
                                 </div>
                             </div>
@@ -129,7 +129,7 @@
             <!-- ページネーション -->
             <div class="mt-10 pt-8 border-t border-gray-200">
                 <div class="pagination-custom space-y-4">
-                    {{ $posts->links() }}
+                    {{ $articles->links() }}
                 </div>
             </div>
         </main>
