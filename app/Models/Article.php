@@ -40,22 +40,34 @@ class Article extends Model
         // ユーザーIDを取得
         $user_id = Auth::id();
         
-        // ID,　user_idから記事を取得
+        // ID, user_idから記事を取得
         return self::where('id', $id)
             ->where('user_id', $user_id)
             ->firstOrFail();
     }
 
+
+    /**
+     * 記事の削除
+     * 
+     * @param int $id
+     * @return void
+     */
     public function deleteArticle($id)
     {
+        // ユーザーID
         $user_id = Auth::id();
 
+        // ID, user_idから記事を取得
         $article = self::where('id', $id)
                     ->where('user_id', $user_id)
                     ->firstOrFail();
         
-        Storage::disk('public')->delete($article->image_path);
+        // 環境を調べ、保存先を変える
+        $disk = app()->isProduction() ? "s3" : "public";
+        Storage::disk($disk)->delete($article->image_path);
         
+        // 削除する
         $article->delete();
     }
 } 
