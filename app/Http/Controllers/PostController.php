@@ -29,18 +29,14 @@ class PostController extends Controller
     }
 
     public function index(Request $request) {
-        $posts = Article::query()
-        ->search($request->search)
-        ->category($request->category)
-        ->orderBy('created_at', 'desc')
-        ->paginate(6);
+        $articles = Article::getArticles($request);
 
-        $posts->appends($request->query());
+        $articles->appends($request->query());
 
         // カテゴリー一覧を取得
         $categories = Category::cases();
 
-        return view('top', compact('posts', 'categories'));
+        return view('top', compact('articles', 'categories'));
     }
 
     /**
