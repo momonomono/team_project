@@ -40,7 +40,7 @@ class PostController extends Controller
         $article['image_path'] = $request->file('image_path')->store('images', 'public');
         
         // 新規記事を追加
-        Article::addNewArticle($article);
+        ( new Article() )->addNewArticle($article);
 
         // トップ画面に戻る
         return redirect()->route('top');
