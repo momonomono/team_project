@@ -6,6 +6,9 @@ namespace Database\Seeders;
 
 use App\Models\Article;
 use Illuminate\Database\Seeder;
+use Database\Seeders\ArticleSeeder;
+use Database\Seeders\CommentSeeder;
+use Database\Seeders\UserSeeder;
 
 class DatabaseSeeder extends Seeder
 {
@@ -29,5 +32,10 @@ class DatabaseSeeder extends Seeder
         //     'content' => 'コンテンツです',
         //     'image_path' => 'images/a.png'
         // ]);  
+        $this->call([
+            UserSeeder::class,
+            ArticleSeeder::class,
+            CommentSeeder::class,
+        ]);
     }
 }

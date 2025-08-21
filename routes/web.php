@@ -15,9 +15,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('top');
-})->name('top');
+Route::get('/', [PostController::class, 'index'])->name('top');
+
+// 詳細画面
+Route::get('/post/{id}', [PostController::class, 'show'])->name('post.show');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -29,6 +30,8 @@ Route::middleware('auth')->group(function () {
     Route::patch('post/edit/{id?}', [PostController::class, 'updateArticle'])->name('update.article');
     // 削除処理
     Route::delete('post/delete', [PostController::class, 'deleteArticle'])->name('delete.article');
+    Route::post('/post/{id}/comment', [PostController::class, 'storeComment'])->name('comments.store');
+    Route::get('/myPosts', [PostController::class, 'myPosts']);
 });
 
 require __DIR__.'/auth.php';

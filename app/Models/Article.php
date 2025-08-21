@@ -1,7 +1,9 @@
 <?php
 
 namespace App\Models;
-
+use Illuminate\Http\Request;
+use Illuminate\Database\Eloquent\Builder;
+use App\Enums\Category;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
@@ -18,6 +20,28 @@ class Article extends Model
         'content',
         'image_path',
     ];
+
+    // カテゴリのキャスト
+    protected $casts = [
+        'category_id' => Category::class,
+    ];
+
+    // image_pathのアクセサ
+    public function getImagePathAttribute($value)
+    {
+        return $value
+            ? (app()->isProduction() ? Storage::disk('s3')->url($value) : asset('storage/' . $value))
+            : null;
+    }
+
+    public static function getArticles(Request $request)
+    {
+        return static::query()
+        ->search($request->search)
+        ->category($request->category)
+        ->orderBy('created_at', 'desc')
+        ->paginate(9);
+    }
 
     public function user()
     {
@@ -69,5 +93,20 @@ class Article extends Model
         
         // 削除する
         $article->delete();
+    }
+
+    // カテゴリー絞り込みスコープ
+    public function scopeCategory(Builder $query, ?int $categoryId): Builder
+    {
+        if (!empty($categoryId)) {
+            $query->where('category_id', $categoryId);
+        }
+        return $query;
+    }
+
+    // 自分の記事を取得するスコープ
+    public function scopeByUser($query)
+    {
+        return $query->where('user_id', auth()->id());
     }
 } 

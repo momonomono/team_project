@@ -1,0 +1,369 @@
+/* Main Content Styles */
+.main-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Search Section */
+/* 検索・フィルター機能用の追加CSS */
+
+.search-form {
+    margin-bottom: 1rem;
+}
+
+.search-input-wrapper {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.category-select {
+    padding: 8px 12px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    background: white;
+    font-size: 14px;
+    min-width: 200px;
+}
+
+.category-select:focus {
+    outline: none;
+    border-color: #007bff;
+    box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+}
+
+/* アクティブフィルター */
+.active-filters {
+    margin-top: 15px;
+    padding: 10px;
+    background: #f8f9fa;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.filter-label {
+    font-weight: 600;
+    color: #6c757d;
+    font-size: 14px;
+}
+
+.filter-tag {
+    background: #007bff;
+    color: white;
+    padding: 4px 8px;
+    border-radius: 12px;
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.remove-filter {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    margin-left: 3px;
+}
+
+.remove-filter:hover {
+    color: #ffc107;
+}
+
+.clear-all-filters {
+    color: #dc3545;
+    text-decoration: none;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.clear-all-filters:hover {
+    text-decoration: underline;
+}
+
+/* 投稿の詳細テキスト */
+.article-excerpt {
+    color: #6c757d;
+    font-size: 14px;
+    line-height: 1.5;
+    margin-bottom: 10px;
+}
+
+/* 検索結果なしの場合 */
+.no-articles {
+    text-align: center;
+    padding: 40px 20px;
+    color: #6c757d;
+}
+
+.reset-search {
+    display: inline-block;
+    margin-top: 10px;
+    color: #007bff;
+    text-decoration: none;
+    padding: 8px 16px;
+    border: 1px solid #007bff;
+    border-radius: 4px;
+}
+
+.reset-search:hover {
+    background: #007bff;
+    color: white;
+}
+
+/* 結果情報 */
+.results-info {
+    text-align: center;
+    padding: 20px;
+    color: #6c757d;
+    font-size: 14px;
+}
+
+/* レスポンシブデザイン */
+@media (max-width: 768px) {
+    .search-input-wrapper {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .category-select {
+        min-width: unset;
+        width: 100%;
+    }
+    
+    .active-filters {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}
+
+/* articles Grid */
+.articles-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 24px;
+    margin-bottom: 40px;
+}
+
+.article-card {
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.article-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+}
+
+.article-image {
+    width: 100%;
+    height: 200px;
+    overflow: hidden;
+}
+
+.article-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.placeholder-image {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #6c757d;
+    font-size: 14px;
+}
+
+.article-content {
+    padding: 20px;
+}
+
+.article-title {
+    margin: 0 0 12px 0;
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 1.4;
+}
+
+.article-title a {
+    color: #212529;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.article-title a:hover {
+    color: #007bff;
+}
+
+.article-meta {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 12px;
+    font-size: 14px;
+    color: #6c757d;
+}
+
+.article-author {
+    font-weight: 500;
+}
+
+.article-time::before {
+    content: "•";
+    margin-right: 8px;
+}
+
+.article-category {
+    display: inline-block;
+    background: #e9ecef;
+    color: #495057;
+    padding: 4px 12px;
+    border-radius: 16px;
+    font-size: 12px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* No articles Message */
+.no-articles {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 60px 20px;
+    color: #6c757d;
+}
+
+.no-articles p {
+    font-size: 18px;
+    margin: 0;
+}
+
+/* Pagination */
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    margin-top: 40px;
+    flex-wrap: wrap;
+}
+
+.pagination-link {
+    padding: 8px 16px;
+    text-decoration: none;
+    color: #007bff;
+    border: 1px solid #dee2e6;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+    font-size: 14px;
+}
+
+.pagination-link:hover:not(.disabled) {
+    background-color: #007bff;
+    color: white;
+    border-color: #007bff;
+}
+
+.pagination-link.disabled {
+    color: #6c757d;
+    cursor: not-allowed;
+    background-color: #f8f9fa;
+}
+
+.pagination-numbers {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.pagination-number {
+    padding: 8px 12px;
+    text-decoration: none;
+    color: #007bff;
+    border: 1px solid #dee2e6;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+    font-size: 14px;
+    min-width: 40px;
+    text-align: center;
+}
+
+.pagination-number:hover {
+    background-color: #007bff;
+    color: white;
+    border-color: #007bff;
+}
+
+.pagination-number.active {
+    background-color: #007bff;
+    color: white;
+    border-color: #007bff;
+}
+
+.pagination-ellipsis {
+    padding: 8px 4px;
+    color: #6c757d;
+    font-size: 14px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .main-content {
+        padding: 15px;
+    }
+    
+    .articles-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+    
+    .pagination {
+        gap: 4px;
+    }
+    
+    .pagination-link,
+    .pagination-number {
+        padding: 6px 10px;
+        font-size: 13px;
+    }
+    
+    .pagination-prev,
+    .pagination-next {
+        order: -1;
+        width: 100%;
+        text-align: center;
+        margin-bottom: 8px;
+    }
+    
+    .pagination-next {
+        order: 1;
+        margin-bottom: 0;
+        margin-top: 8px;
+    }
+}
+
+@media (max-width: 480px) {
+    .search-input {
+        font-size: 14px;
+        padding: 10px 45px 10px 14px;
+    }
+    
+    .article-content {
+        padding: 16px;
+    }
+    
+    .article-title {
+        font-size: 16px;
+    }
+}
