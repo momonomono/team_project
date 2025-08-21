@@ -57,9 +57,11 @@ class PostController extends Controller
     {   
         // DBに入れるデータを変数に挿入
         $article = $request->validated();
-        // 画像の保管
-        $article['image_path'] = $request->file('image_path')->store('images', 'public');
+        // 開発環境に合わせた画像の保管
+        $disk = app()->isProduction() ? "s3" : "public";
+        $article['image_path'] = $request->file('image_path')->store('images', $disk);
         
+
         // 新規記事を追加
         ( new Article() )->addNewArticle($article);
 
