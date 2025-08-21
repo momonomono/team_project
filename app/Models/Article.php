@@ -34,6 +34,7 @@ class Article extends Model
             ? (app()->isProduction() ? Storage::disk('s3')->url($value) : asset('storage/' . $value))
             : null;
     }
+
     public static function getArticles(Request $request)
     {
         return static::query()

@@ -10,6 +10,12 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Pagination\Paginator;
 use App\Http\Requests\CommentRequest;
 use App\Models\Comment;
+use App\Http\Requests\CommentRequest;
+use App\Models\Article;
+use App\Models\Comment;
+use Illuminate\Http\Request;
+use Illuminate\Pagination\Paginator;
+use App\Enums\Category;
 
 class PostController extends Controller
 {
@@ -29,7 +35,8 @@ class PostController extends Controller
             ->with(compact("categories"));
     }
 
-    public function index(Request $request) {
+    public function index(Request $request) 
+    {
         $articles = Article::getArticles($request);
 
         $articles->appends($request->query());
@@ -60,6 +67,7 @@ class PostController extends Controller
         return redirect()->route('top');
     }
 
+        
     /**
      * 詳細画面
      *
