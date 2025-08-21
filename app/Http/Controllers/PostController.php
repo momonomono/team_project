@@ -36,13 +36,6 @@ class PostController extends Controller
      */
     public function updateArticle(ArticleRequest $request, $id)
     {   
-        
-        // IDがない場合、新規投稿画面へ
-        // if (!$id) {
-        //     return redirect()
-        //     ->route("create.article");
-        // }
-
         // 新規投稿画面へ ある場合、記事を取得
         $article = (new Article())->checkOwnArticle($id);
         
@@ -72,7 +65,6 @@ class PostController extends Controller
      */
     public function deleteArticle(Request $request)
     {   
-        
         // リクエストからIDを取得
         $id = $request->id;
 

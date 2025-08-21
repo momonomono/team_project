@@ -46,12 +46,6 @@ class Article extends Model
             ->firstOrFail();
     }
 
-    public function updateArticle($id, $postData)
-    {
-        
-        
-    }
-
     public function deleteArticle($id)
     {
         $user_id = Auth::id();
