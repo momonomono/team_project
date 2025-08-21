@@ -34,4 +34,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/myPosts', [PostController::class, 'myPosts']);
 });
 
+// 詳細画面
+Route::get('/post/{id}', [PostController::class, 'show'])->name('post.show');
+
+
 require __DIR__.'/auth.php';

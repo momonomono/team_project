@@ -7,11 +7,9 @@ use App\Models\Article;
 use App\Http\Requests\ArticleRequest;
 use App\Enums\Category;
 use App\Http\Requests\ArticleDeleteRequest;
-use App\Models\Article;
 use App\Models\Comment;
-use Illuminate\Http\Request;
 use Illuminate\Pagination\Paginator;
-use App\Enums\Category;
+use App\Http\Requests\CommentRequest;
 
 class PostController extends Controller
 {

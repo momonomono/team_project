@@ -35,7 +35,7 @@
                             </label>
                             <img id="js-image" 
                                 class="w-52 h-52 absolute top-0 left-0 object-cover"
-                                src="{{ $article->image_path ? asset('storage/' . $article->image_path) : '' }}"
+                                src="{{ $article->image_path }}"
                             >
                         </article>
                         @error('image_path')
