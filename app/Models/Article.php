@@ -1,27 +1,30 @@
 <?php
 
 namespace App\Models;
+
 use Illuminate\Http\Request;
-use Illuminate\Database\Eloquent\Builder;
 use App\Enums\Category;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Storage;
 
 class Article extends Model
 {
     use HasFactory;
 
+     // カテゴリのキャスト
+     protected $casts = [
+        'category_id' => Category::class,
+    ];
+
     protected $fillable = [
         'user_id',
+        'category_id',
         'title',
         'content',
         'image_path',
-    ];
-
-    // カテゴリのキャスト
-    protected $casts = [
-        'category_id' => Category::class,
     ];
 
     // image_pathのアクセサ
@@ -51,6 +54,21 @@ class Article extends Model
         return $this->hasMany(Comment::class);
     }
 
+    /**
+     *  新規記事を追加する
+     * 
+     * @param array $article
+     * @return void
+     */
+    public function addNewArticle($article)
+    {
+        // ログインユーザーのIDを追加
+        $article['user_id'] = Auth::id();
+
+        // DBに登録
+        self::create($article);
+    }
+    
     // タイトル or コンテンツ検索スコープ
     public function scopeSearch(Builder $query, ?string $term): Builder
     {
