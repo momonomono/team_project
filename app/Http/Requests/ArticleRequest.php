@@ -37,4 +37,27 @@ class ArticleRequest extends FormRequest
             "content" => "required|string|max:2000",
         ];
     }
+
+    public function message()
+    {
+        return [
+            'required' => ':attributeは必須事項です。',
+            'string' => ':attributeは文字を入力してください。',
+            'max' => ':attributeは:max文字以内で入力してください。',
+            'image' => ':attributeは画像ファイルを選択してください。',
+            'mimes' => ':attributeは画像形式を選択してください。',
+            'between' => 'そのようなカテゴリーは存在しません。',
+            'integer' => 'そのようなカテゴリーは存在しません。',
+        ];
+    }
+
+    public function attributes()
+    {
+        return [
+            'title' => 'タイトル',
+            'image_path' => '投稿画像',
+            'category_id' => 'カテゴリー',
+            'content' => '内容',
+        ];
+    }
 }

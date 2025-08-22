@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\SearchController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -17,9 +18,6 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [PostController::class, 'index'])->name('top');
 
-// 詳細画面
-Route::get('/post/{id}', [PostController::class, 'show'])->name('post.show');
-
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
@@ -30,12 +28,15 @@ Route::middleware('auth')->group(function () {
     Route::patch('post/edit/{id?}', [PostController::class, 'updateArticle'])->name('update.article');
     // 削除処理
     Route::delete('post/delete', [PostController::class, 'deleteArticle'])->name('delete.article');
+    // 新規投稿画面と登録
+    Route::get('/post/create', [PostController::class, 'createArticle'])->name('create.article');
+    Route::post('/post/create', [PostController::class, 'storeArticle'])->name('store.article');
+    // コメント投稿
     Route::post('/post/{id}/comment', [PostController::class, 'storeComment'])->name('comments.store');
     Route::get('/myPosts', [PostController::class, 'myPosts']);
 });
 
 // 詳細画面
 Route::get('/post/{id}', [PostController::class, 'show'])->name('post.show');
-
 
 require __DIR__.'/auth.php';

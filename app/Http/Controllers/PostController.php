@@ -6,10 +6,11 @@ use Illuminate\Http\Request;
 use App\Models\Article;
 use App\Http\Requests\ArticleRequest;
 use App\Enums\Category;
-use App\Http\Requests\ArticleDeleteRequest;
 use App\Models\Comment;
 use Illuminate\Pagination\Paginator;
 use App\Http\Requests\CommentRequest;
+use Illuminate\Support\Facades\Auth;
+
 
 class PostController extends Controller
 {
@@ -41,16 +42,17 @@ class PostController extends Controller
     {   
         // 新規投稿画面へ ある場合、記事を取得
         $article = (new Article())->checkOwnArticle($id);
-        
+    
         // バリデーションを通過したデータを取得
         $postData = $request->validated();
 
         // 画像がアップロードされている場合、保存
         if ($request->hasFile('image_path')) {
-            $postData['image_path'] = $postData->file('image_path')->store('images', 'public');
+            $disk = app()->isProduction() ? 's3' : 'public';
+            $postData['image_path'] = $request->file('image_path')->store('images', $disk);
         // 画像がアップロードされていない場合、既存の画像パスを保持
         } else {
-            $postData['image_path'] = $article->image_path;
+            $postData['image_path'] = $article->getRawOriginal('image_path');
         }
 
         // 記事の更新
@@ -80,6 +82,21 @@ class PostController extends Controller
             ->route('top');
     }
 
+    /**
+     * 新規投稿画面
+     * 
+     * @param 
+     * @return
+     */
+    public function createArticle()
+    {
+        // カテゴリーのセレクター用データ
+        $categories = Category::cases();
+
+        return view("create")
+            ->with(compact("categories"));
+    }
+
     public function index(Request $request) 
     {
         $articles = Article::getArticles($request);
@@ -91,6 +108,28 @@ class PostController extends Controller
 
         return view('top', compact('articles', 'categories'));
     }
+
+    /**
+     * 新規投稿登録
+     * 
+     * @param ArticleRequest $request
+     * @return
+     */
+    public function storeArticle(ArticleRequest $request)
+    {   
+        // DBに入れるデータを変数に挿入
+        $article = $request->validated();
+        // 開発環境に合わせた画像の保管
+        $disk = app()->isProduction() ? "s3" : "public";
+        $article['image_path'] = $request->file('image_path')->store('images', $disk);
+
+        // 新規記事を追加
+        ( new Article() )->addNewArticle($article);
+
+        // トップ画面に戻る
+        return redirect()->route('top');
+    }
+
         
     /**
      * 詳細画面
