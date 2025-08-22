@@ -89,11 +89,6 @@ class Article extends Model
         }
         return $query;
     }
-    // attributes for category
-    // public function getCategoryAttribute()
-    // {
-    //     return Category::from($this->category_id)->label();
-    // }
 
     // 自分の記事を取得するスコープ
     public function scopeByUser($query)
