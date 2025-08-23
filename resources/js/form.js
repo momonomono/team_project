@@ -29,3 +29,13 @@ if (formImagePath) {
         reader.readAsDataURL(path);
     });
 }
+
+// 削除確認のポップアップ
+const deleteButton = document.querySelector('#js-button-delete');
+if (deleteButton) {
+    deleteButton.addEventListener('click', (e) => {
+        if (!confirm( '本当に削除しますか？') ){
+            e.preventDefault();
+        }
+    });
+}

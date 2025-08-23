@@ -23,6 +23,11 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
+    // 記事の更新画面と更新処理
+    Route::get('post/edit/{id?}', [PostController::class, 'editArticle'])->name('edit.article');
+    Route::patch('post/edit/{id?}', [PostController::class, 'updateArticle'])->name('update.article');
+    // 削除処理
+    Route::delete('post/delete', [PostController::class, 'deleteArticle'])->name('delete.article');
     // 新規投稿画面と登録
     Route::get('/post/create', [PostController::class, 'createArticle'])->name('create.article');
     Route::post('/post/create', [PostController::class, 'storeArticle'])->name('store.article');

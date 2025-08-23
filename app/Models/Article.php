@@ -55,7 +55,23 @@ class Article extends Model
     }
 
     /**
-     *  新規記事を追加する
+     *  表示記事が自身のものか確認
+     *  
+     *  @param int $id
+     *  @return Article|redirect
+     */
+    public function checkOwnArticle($id)
+    {
+        // ユーザーIDを取得
+        $user_id = Auth::id();
+        
+        // ID, user_idから記事を取得
+        return self::where('id', $id)
+            ->where('user_id', $user_id)
+            ->firstOrFail();
+    }
+
+    /**  新規記事を追加する
      * 
      * @param array $article
      * @return void
@@ -79,6 +95,31 @@ class Article extends Model
             });
         }
         return $query;
+    }
+
+
+    /**
+     * 記事の削除
+     * 
+     * @param int $id
+     * @return void
+     */
+    public function deleteArticle($id)
+    {
+        // ユーザーID
+        $user_id = Auth::id();
+
+        // ID, user_idから記事を取得
+        $article = self::where('id', $id)
+                    ->where('user_id', $user_id)
+                    ->firstOrFail();
+        
+        // 環境を調べ、保存先を変える
+        $disk = app()->isProduction() ? "s3" : "public";
+        Storage::disk($disk)->delete($article->image_path);
+        
+        // 削除する
+        $article->delete();
     }
 
     // カテゴリー絞り込みスコープ
