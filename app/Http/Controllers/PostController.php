@@ -132,20 +132,6 @@ class PostController extends Controller
         // トップ画面に戻る
         return redirect()->route('top');
     }
-
-        
-
-    public function index(Request $request) 
-    {
-        $articles = Article::getArticles($request);
-
-        $articles->appends($request->query());
-
-        // カテゴリー一覧を取得
-        $categories = Category::cases();
-
-        return view('top', compact('articles', 'categories'));
-    }
         
     /**
      * 詳細画面
