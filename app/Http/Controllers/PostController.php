@@ -2,84 +2,44 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Models\Article;
-use App\Http\Requests\ArticleRequest;
 use App\Enums\Category;
-use App\Models\Comment;
-use Illuminate\Pagination\Paginator;
+use App\Http\Requests\ArticleRequest;
 use App\Http\Requests\CommentRequest;
+use App\Models\Article;
+use App\Models\Comment;
+use Illuminate\Http\Request;
+use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Auth;
-
 
 class PostController extends Controller
 {
     /**
-     * 編集画面
+     * トップ画面
      * 
-     * @param int $id
-     * @return \Illuminate\View\View
+     * @param Request $request
+     * @return
      */
-    public function editArticle($id)
+    public function index(Request $request) 
     {
-        // IDがない場合、新規投稿画面へ ある場合、記事を取得
-        $article = (new Article())->checkOwnArticle($id);
+        $articles = Article::getArticles($request);
 
-        // カテゴリーの取得
+        $articles->appends($request->query());
+
+        // カテゴリー一覧を取得
         $categories = Category::cases();
 
-        return view("edit", compact('categories', 'article'));
+        return view('top', compact('articles', 'categories'));
     }
 
-
     /**
-     * 記事の新規登録
+     * 自分の投稿一覧
      * 
-     * @param ArticleRequest $request
-     * @return \Illuminate\Http\RedirectResponse
+     * @param 
+     * @return
      */
-    public function updateArticle(ArticleRequest $request, $id)
-    {   
-        // 新規投稿画面へ ある場合、記事を取得
-        $article = (new Article())->checkOwnArticle($id);
-    
-        // バリデーションを通過したデータを取得
-        $postData = $request->validated();
-
-        // 画像がアップロードされている場合、保存
-        if ($request->hasFile('image_path')) {
-            $disk = app()->isProduction() ? 's3' : 'public';
-            $postData['image_path'] = $request->file('image_path')->store('images', $disk);
-        // 画像がアップロードされていない場合、既存の画像パスを保持
-        } else {
-            $postData['image_path'] = $article->getRawOriginal('image_path');
-        }
-
-        // 記事の更新
-        $article->update($postData);
-
-        return back();
-    }
-
-
-    /**
-     * 記事の削除
-     * 
-     * @param ArticleDeleteRequest $request
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    public function deleteArticle(Request $request)
-    {   
-        // リクエストからIDを取得
-        $id = $request->id;
-
-        $article = new Article();
-
-        // 記事を削除
-        $article->deleteArticle($id);
-        
-        return redirect()
-            ->route('top');
+    public function myPosts() {
+        $myPosts = Article::getMyPosts();
+        return view('myPosts', compact('myPosts'));
     }
 
     /**
@@ -95,18 +55,6 @@ class PostController extends Controller
 
         return view("create")
             ->with(compact("categories"));
-    }
-
-    public function index(Request $request) 
-    {
-        $articles = Article::getArticles($request);
-
-        $articles->appends($request->query());
-
-        // カテゴリー一覧を取得
-        $categories = Category::cases();
-
-        return view('top', compact('articles', 'categories'));
     }
 
     /**
@@ -132,7 +80,72 @@ class PostController extends Controller
         // トップ画面に戻る
         return redirect()->route('top');
     }
+
+    /**
+     * 編集画面
+     * 
+     * @param int $id
+     * @return \Illuminate\View\View
+     */
+    public function editArticle($id)
+    {
+        // IDがない場合、新規投稿画面へ ある場合、記事を取得
+        $article = (new Article())->checkOwnArticle($id);
+
+        // カテゴリーの取得
+        $categories = Category::cases();
+
+        return view("edit", compact('categories', 'article'));
+    }
+
+    /**
+     * 記事の新規登録
+     * 
+     * @param ArticleRequest $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function updateArticle(ArticleRequest $request, $id)
+    {   
+        // 新規投稿画面へ ある場合、記事を取得
+        $article = (new Article())->checkOwnArticle($id);
+    
+        // バリデーションを通過したデータを取得
+        $postData = $request->validated();
+
+        // 画像がアップロードされている場合、保存
+        if ($request->hasFile('image_path')) {
+            $disk = app()->isProduction() ? 's3' : 'public';
+            $postData['image_path'] = $request->file('image_path')->store('images', $disk);
+        } else {
+            // 画像がアップロードされていない場合、既存の画像パスを保持
+            $postData['image_path'] = $article->getRawOriginal('image_path');
+        }
+
+        // 記事の更新
+        $article->update($postData);
+
+        return back();
+    }
+
+    /**
+     * 記事の削除
+     * 
+     * @param ArticleDeleteRequest $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function deleteArticle(Request $request)
+    {   
+        // リクエストからIDを取得
+        $id = $request->id;
+
+        $article = new Article();
+
+        // 記事を削除
+        $article->deleteArticle($id);
         
+        return redirect()->route('top');
+    }
+
     /**
      * 詳細画面
      *
@@ -164,10 +177,5 @@ class PostController extends Controller
 
         // 確認用にリダイレクト
         return back()->with('success', 'コメントを投稿しました。');
-    }
-
-    public function myPosts() {
-        $myPosts = Article::getMyPosts();
-        return view('myPosts', compact('myPosts'));
     }
 }

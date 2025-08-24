@@ -1,7 +1,6 @@
 <?php
 
 use App\Http\Controllers\PostController;
-use App\Http\Controllers\SearchController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -33,6 +32,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/post/create', [PostController::class, 'storeArticle'])->name('store.article');
     // コメント投稿
     Route::post('/post/{id}/comment', [PostController::class, 'storeComment'])->name('comments.store');
+    // 自分の投稿一覧
     Route::get('/myPosts', [PostController::class, 'myPosts'])->name('post.myPosts');
 });
 
