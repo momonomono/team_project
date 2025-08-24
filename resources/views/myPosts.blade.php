@@ -5,6 +5,9 @@
             <!-- ヘッダーセクション -->
             <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8 pb-6 border-b-2 border-gray-200">
                 <h1 class="text-3xl font-bold text-gray-800 mb-4 sm:mb-0">Your Posts</h1>
+                <a href="{{ route('create.article') }}" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg transition duration-300 ease-in-out">
+                    新規作成
+                </a>
             </div>
 
             <!-- 投稿グリッド -->

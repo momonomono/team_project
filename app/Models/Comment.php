@@ -24,4 +24,15 @@ class Comment extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    /**
+     * コメント作成
+     * 
+     * @param array $data
+     * @return Comment
+     */
+    public static function createComment(array $data)
+    {
+        return self::create($data);
+    }
 } 

@@ -168,14 +168,12 @@ class PostController extends Controller
      */
     public function storeComment(CommentRequest $request, $id)
     {
-        // コメント保存
-        $comment = new Comment();
-        $comment->article_id = $id;
-        $comment->user_id = auth()->id();
-        $comment->content = $request->input('comment');
-        $comment->save();
+        Comment::createComment([
+            'article_id' => $id,
+            'user_id' => auth()->id(),
+            'content' => $request->input('comment'),
+        ]);
 
-        // 確認用にリダイレクト
         return back()->with('success', 'コメントを投稿しました。');
     }
 }

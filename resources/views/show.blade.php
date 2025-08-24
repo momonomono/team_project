@@ -17,7 +17,7 @@
 
         <!-- 本文 -->
         <div class="text-gray-700 leading-relaxed mb-8">
-            {{ $article->content }}
+            {!! nl2br(e($article->content)) !!}
         </div>
 
         <!-- コメントセクション -->
@@ -26,7 +26,7 @@
 
             <!-- コメント投稿フォーム（ログインユーザーのみ） -->
             @auth
-                <form action="{{ route('comments.store', 1) }}" method="POST" class="flex">
+                <form action="{{ route('comments.store', $article->id) }}" method="POST" class="flex">
                     @csrf
                     <input type="text" name="comment" placeholder="コメントを入力してください" class="w-full border rounded-l-lg px-4 py-2 focus:outline-none focus:ring focus:ring-blue-200">
                     <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-r-lg hover:bg-blue-600">投稿</button>
