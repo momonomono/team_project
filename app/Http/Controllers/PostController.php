@@ -132,7 +132,6 @@ class PostController extends Controller
         // トップ画面に戻る
         return redirect()->route('top');
     }
-
         
     /**
      * 詳細画面
@@ -168,7 +167,7 @@ class PostController extends Controller
     }
 
     public function myPosts() {
-        $myPosts = Article::byUser()->paginate(6);
+        $myPosts = Article::getMyPosts();
         return view('myPosts', compact('myPosts'));
     }
 }

@@ -33,7 +33,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/post/create', [PostController::class, 'storeArticle'])->name('store.article');
     // コメント投稿
     Route::post('/post/{id}/comment', [PostController::class, 'storeComment'])->name('comments.store');
-    Route::get('/myPosts', [PostController::class, 'myPosts']);
+    Route::get('/myPosts', [PostController::class, 'myPosts'])->name('post.myPosts');
 });
 
 // 詳細画面
