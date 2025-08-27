@@ -1,7 +1,7 @@
 <x-app-layout>
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <!-- メインコンテンツ -->
-        <main class="bg-white rounded-lg shadow-md p-6 sm:p-8">
+        <div class="bg-white rounded-lg shadow-md p-6 sm:p-8">
             <!-- ヘッダーセクション -->
             <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8 pb-6 border-b-2 border-gray-200">
                 <h1 class="text-3xl font-bold text-gray-800 mb-4 sm:mb-0">投稿一覧</h1>
@@ -85,6 +85,6 @@
             <div class="mt-10 pt-8 border-t border-gray-200">
                 {{ $articles->links() }}
             </div>
-        </main>
+        </div>
     </div>
 </x-app-layout>
