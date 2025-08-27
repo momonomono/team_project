@@ -5,7 +5,7 @@
 
             {{-- ページタイトル --}}
             <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8 pb-6 border-b-2 border-gray-200">
-                <h1 class="text-3xl font-bold text-gray-800 mb-4 sm:mb-0">Creat Posts</h1>
+                <h1 class="text-3xl font-bold text-gray-800 mb-4 sm:mb-0">新規作成</h1>
             </div>
             
             {{-- 投稿 --}}
@@ -62,8 +62,8 @@
                         @enderror
                     </label>
                 
-                    <button class="bg-green-500 hover:bg-green-400 text-white font-bold py-2 px-4 rounded-lg transition duration-300 ease-in-out">
-                        Submit
+                    <button class="bg-green-500 hover:bg-green-400 text-white font-bold py-2 w-20 rounded-lg transition duration-300 ease-in-out">
+                        送信
                     </button>
                 </form>
             </article>

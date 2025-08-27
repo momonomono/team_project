@@ -4,7 +4,7 @@
         
             {{-- ページタイトル --}}
             <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8 pb-6 border-b-2 border-gray-200">
-                <h1 class="text-3xl font-bold text-gray-800 mb-4 sm:mb-0">Edit Posts</h1>
+                <h1 class="text-3xl font-bold text-gray-800 mb-4 sm:mb-0">投稿編集・削除</h1>
             </div>
             {{-- 投稿フォーム --}}
             <form method="POST" enctype="multipart/form-data" class>
@@ -68,9 +68,9 @@
                     </label>
                 </article>
             
-            <div class="flex gap-4">
-                <button class="bg-green-500 hover:bg-green-400 text-white font-bold py-2 px-4 rounded-lg transition duration-300 ease-in-out">
-                    Update
+            <div class="grid gap-10">
+                <button class="bg-green-500 hover:bg-green-400 text-white font-bold py-2 w-20 rounded-lg transition duration-300 ease-in-out">
+                    編集
                 </button>
                 </form>
     
@@ -79,10 +79,10 @@
                     @method('DELETE')
                     <input type="hidden" name="id" value="{{ $article->id }}">
                     <button 
-                        class="bg-red-600 hover:bg-red-500 text-white font-bold py-2 px-4 rounded-lg transition duration-300 ease-in-out"
+                        class="bg-red-600 hover:bg-red-500 text-white font-bold py-2 w-20 rounded-lg transition duration-300 ease-in-out"
                         id="js-button-delete"    
                     >
-                        Delete
+                        削除
                     </button>
                 </form>
             </div>
