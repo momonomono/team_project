@@ -14,7 +14,8 @@
             <!-- 投稿グリッド -->
             <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 mb-10">
                 @foreach($myPosts as $myPost)
-                    <article class="bg-white border border-gray-200 rounded-lg overflow-hidden hover:transform hover:-translate-y-1 hover:shadow-lg transition-all duration-300 cursor-pointer">
+                <article class="bg-white border border-gray-200 rounded-lg overflow-hidden hover:transform hover:-translate-y-1 hover:shadow-lg transition-all duration-300 cursor-pointer">
+                    <a href="{{ route('post.show', $myPost->id) }}" class="block">
                         <!-- 画像 -->
                         <div class="aspect-w-16 aspect-h-9">
                             @if($myPost->image_path)
@@ -27,7 +28,7 @@
                                 </div>
                             @endif
                         </div>
-                        
+                
                         <!-- コンテンツ -->
                         <div class="p-5">
                             <h3 class="text-xl font-semibold text-gray-800 mb-3">{{ $myPost->title }}</h3>
@@ -41,14 +42,18 @@
                                     {{ $myPost->category_id->label() }}
                                 </span>
                             </div>
-                            <div class="mt-4">
-                                <a href="{{ route('edit.article', $myPost->id) }}" 
-                                   class="bg-orange-500 hover:bg-orange-600 text-white font-bold py-2 px-4 rounded-lg transition duration-300 ease-in-out">
-                                    編集
-                                </a>
-                            </div>
                         </div>
-                    </article>
+                    </a>
+                
+                    <!-- 編集ボタンだけ別 -->
+                    <div class="p-5">
+                        <a href="{{ route('edit.article', $myPost->id) }}" 
+                           class="bg-orange-500 hover:bg-orange-600 text-white font-bold py-2 px-4 rounded-lg transition duration-300 ease-in-out">
+                            編集
+                        </a>
+                    </div>
+                </article>
+                
                 @endforeach
             </div>
 
