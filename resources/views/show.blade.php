@@ -39,14 +39,19 @@
 
             <!-- コメントリスト -->
             <div class="mt-4 space-y-4">
-                @foreach ($article->comments as $comment)
+                
+                @forelse ($article->comments as $comment)
                     <div class="bg-gray-100 p-4 rounded-lg">
                         <p class="text-gray-800">{{ $comment->content }}</p>
                         <div class="text-sm text-gray-500 mt-1">
                             {{ $comment->user->name }} ・ {{ $comment->created_at->diffForHumans() }}
                         </div>
                     </div>
-                @endforeach
+                @empty
+                    <div class="bg-gray-100 p-4 rounded-lg">
+                        <p class="text-gray-800">まだコメントはありません</p>
+                    </div>
+                @endforelse
             </div>
         </div>
     </div>
