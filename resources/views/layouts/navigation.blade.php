@@ -13,12 +13,13 @@
                 </div>
 
                 <div class="hidden sm:flex">
-                    <!--  -->
-                    <div class="shrink-0 mx-4 flex items-center">
-                        <a href="{{ route('post.myPosts') }}">
-                            <p>myPosts</p>
-                        </a>
-                    </div>
+                    @auth
+                        <div class="shrink-0 mx-4 flex items-center">
+                            <a href="{{ route('post.myPosts') }}">
+                                <p>自分の投稿</p>
+                            </a>
+                        </div>
+                    @endauth
                 </div>
 
             </div>
@@ -93,7 +94,7 @@
                     </x-responsive-nav-link>
 
                     <x-responsive-nav-link :href="route('post.myPosts')">
-                        <p>myPosts</p>
+                        <p>自分の投稿</p>
                     </x-responsive-nav-link>
 
                     <!-- Authentication -->
