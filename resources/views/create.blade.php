@@ -17,7 +17,7 @@
                         <p>タイトル</p>
                         <input type="text" name="title" value="{{ old('title') }}">
                         @error('title')
-                            <p>{{ $message }}</p>
+                            <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
                         @enderror
                     </label>
                     
@@ -26,7 +26,7 @@
                         <p>画像</p>
                         <article class="w-52 h-52 relative">
                             <div class="w-full h-full flex justify-center items-center bg-gray-600">
-                                <p class="text-white">ここにドラッグしてください</p>
+                                <p class="text-white">画像を追加する</p>
                             </div>
                             <label class="z-10 absolute top-0 left-0 w-52 h-52">
                                 <input type="file" name="image_path" class="hidden" id="js-form-imagePath">
@@ -34,7 +34,7 @@
                             <img id="js-image" class="w-52 h-52 absolute top-0 left-0 object-cover" >
                         </article>
                         @error('image_path')
-                            <p>{{ $message }}</p>
+                            <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
                         @enderror
                     </article>
                     
@@ -49,7 +49,7 @@
                             @endforeach
                         </select>
                         @error('category_id')
-                            <p>{{ $message }}</p>
+                            <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
                         @enderror
                     </label>
                 
@@ -58,12 +58,12 @@
                         <p>詳細</p>
                         <textarea name="content">{{ old('content') }}</textarea>
                         @error('content')
-                            <p>{{ $message }}</p>
+                            <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
                         @enderror
                     </label>
                 
-                    <button class="px-4 py-2 w-fit bg-gray-500 text-white">
-                        送信する
+                    <button class="bg-green-500 hover:bg-green-400 text-white font-bold py-2 px-4 rounded-lg transition duration-300 ease-in-out">
+                        Submit
                     </button>
                 </form>
             </article>
