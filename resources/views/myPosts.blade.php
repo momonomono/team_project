@@ -45,11 +45,11 @@
                         </div>
                     </a>
                 
-                    <!-- 編集ボタンだけ別 -->
+                    <!-- 更新ボタンだけ別 -->
                     <div class="p-5">
                         <a href="{{ route('edit.article', $myPost->id) }}" 
                            class="bg-orange-500 hover:bg-orange-600 text-white font-bold py-2 px-4 rounded-lg transition duration-300 ease-in-out">
-                            編集
+                            更新
                         </a>
                     </div>
                 </article>
