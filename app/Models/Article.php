@@ -147,9 +147,26 @@ class Article extends Model
         
         // 環境を調べ、保存先を変える
         $disk = app()->isProduction() ? "s3" : "public";
-        Storage::disk($disk)->delete($article->image_path);
-        
+
+        // ストレージから画像を削除する
+        self::deleteImageFromStorage($article, $disk);
+
         // 削除する
         $article->delete();
+    }
+
+    /**
+     *  ストレージから画像の削除
+     * 
+     *  @param Article $article, string $disk
+     *  @return void
+     */
+    public function deleteImageFromStorage($article, $disk)
+    {
+        // 絶対パスを相対パスに変換
+        $path = ltrim(parse_url($article->image_path, PHP_URL_PATH), '/');
+        
+        // ストレージから画像を削除
+        Storage::disk($disk)->delete($path);
     }
 } 

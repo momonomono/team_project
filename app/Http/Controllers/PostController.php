@@ -10,6 +10,7 @@ use App\Models\Comment;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller
 {
@@ -82,7 +83,7 @@ class PostController extends Controller
     }
 
     /**
-     * 編集画面
+     * 編集画面への移動
      * 
      * @param int $id
      * @return \Illuminate\View\View
@@ -99,7 +100,7 @@ class PostController extends Controller
     }
 
     /**
-     * 記事の新規登録
+     * 記事の編集
      * 
      * @param ArticleRequest $request
      * @return \Illuminate\Http\RedirectResponse
@@ -116,6 +117,10 @@ class PostController extends Controller
         if ($request->hasFile('image_path')) {
             $disk = app()->isProduction() ? 's3' : 'public';
             $postData['image_path'] = $request->file('image_path')->store('images', $disk);
+            
+            // ストレージから画像を削除する
+            (new Article()) -> deleteImageFromStorage($article, $disk);
+            
         } else {
             // 画像がアップロードされていない場合、既存の画像パスを保持
             $postData['image_path'] = $article->getRawOriginal('image_path');
