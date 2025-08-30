@@ -165,8 +165,10 @@ class Article extends Model
     {
         // 絶対パスを相対パスに変換
         $path = ltrim(parse_url($article->image_path, PHP_URL_PATH), '/');
-        
-        // ストレージから画像を削除
-        Storage::disk($disk)->delete($path);
-    }
+
+        if (Storage::disk($disk)->exists($path)) {    
+            // ストレージから画像を削除
+            Storage::disk($disk)->delete($path);
+        }
+    }  
 } 
